@@ -20,22 +20,22 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <header className="topbar">
-        <div className="title-wrapper">
-          <div className="circle-deco" />
-          <h1 className="site-title">GoViaje</h1>
+       <header className="topbar flex justify-between items-center px-4 py-2 bg-white shadow-md">
+        <div className="title-wrapper flex items-center">
+          <div className="circle-deco mr-2" />
+          <h1 className="site-title text-2xl font-bold text-[#8b1f3b]">GoViaje</h1>
         </div>
-        <nav className="main-nav">
-          <Link to="/destination" className="nav-item">
-            <MapPin className="icon" />
+        <nav className="main-nav flex space-x-4">
+          <Link to="/destination" className="nav-item flex items-center text-gray-700 hover:text-[#8b1f3b]">
+            <MapPin className="icon mr-1" />
             <span>Destinos</span>
           </Link>
-          <Link to="/about" className="nav-item">
-            <Users className="icon" />
+          <Link to="/about" className="nav-item flex items-center text-gray-700 hover:text-[#8b1f3b]">
+            <Users className="icon mr-1" />
             <span>Nosotros</span>
           </Link>
-          <Link to="/login" className="nav-item">
-            <User className="icon" />
+          <Link to="/login" className="nav-item flex items-center text-gray-700 hover:text-[#8b1f3b]">
+            <User className="icon mr-1" />
             <span>Iniciar sesión</span>
           </Link>
         </nav>
@@ -54,10 +54,6 @@ export default function Home() {
         <button className="icon-button">
           <Bus />
           <span>Autobuses</span>
-        </button>
-        <button className="icon-button">
-          <Ship />
-          <span>Cruceros</span>
         </button>
       </nav>
 
