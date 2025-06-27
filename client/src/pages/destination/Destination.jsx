@@ -143,7 +143,7 @@ const Destination = () => {
             <MapPin className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
-            Centro de <span className="bg-gradient-to-r from-[#8b1f3b] to-[#A91B60] bg-clip-text text-transparent">Reservas</span>
+            Centro de Reservas <span className="bg-gradient-to-r from-[#8b1f3b] to-[#A91B60] bg-clip-text text-transparent"></span>
           </h1>
           <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             Descubre las mejores opciones de transporte desde Ciudad de México hacia Cancún o Los Cabos.
