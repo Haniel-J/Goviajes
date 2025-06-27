@@ -45,7 +45,7 @@ export default function ModalReservar({ open, setOpen, destino }) {
       aria-labelledby="modal-title"
       onClick={handleBackdropClick}
     >
-      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg relative transform transition-all duration-300 scale-100 animate-in slide-in-from-bottom-4">
+      <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg relative transform transition-all duration-300 scale-100 animate-in slide-in-from-bottom-4 max-h-[90vh] overflow-y-auto">
         
         {/* Header con gradiente */}
         <div className="bg-gradient-to-r from-[#8b1f3b] to-[#A91B60] rounded-t-3xl p-6 relative overflow-hidden">

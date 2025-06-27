@@ -26,7 +26,8 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
-        localStorage.setItem("user", email);
+        const data = await res.json(); // 👈 Agregado: obtener datos del usuario
+        localStorage.setItem("user", JSON.stringify(data)); // 👈 Guardar todo el objeto del usuario
         window.location.href = "/";
       } else {
         alert("Correo o contraseña incorrectos");
@@ -38,7 +39,6 @@ export default function Login() {
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white to-gray-100">
-      {/* Fondo carrusel */}
       {fondos.map((img, i) => (
         <img
           key={i}
@@ -51,7 +51,6 @@ export default function Login() {
         />
       ))}
 
-      {/* Capa oscura con degradado */}
       <div
         className="absolute inset-0 z-10"
         style={{
@@ -60,7 +59,6 @@ export default function Login() {
         }}
       ></div>
 
-      {/* Contenedor del formulario */}
       <div className="relative z-20 w-full max-w-md bg-white bg-opacity-90 backdrop-blur-sm rounded-3xl shadow-2xl p-10 border-t-8 border-[#8b1f3b]">
         <h2 className="text-4xl font-extrabold text-center text-[#8b1f3b] mb-10 tracking-wide drop-shadow-md">
           Inicia sesión

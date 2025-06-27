@@ -7,7 +7,9 @@ import cabosImg3 from "../../assets/cabos3.png";
 export default function Register() {
   const fondos = [cancunImg, cabosImg, cancunImg3, cabosImg3];
   const [index, setIndex] = useState(0);
-  const [email, setEmail] = useState("");
+
+  const [nombreCompleto, setNombreCompleto] = useState("");
+  const [email, setEmail] = useState(""); // opcional si el backend lo necesita
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -19,20 +21,30 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/usuarios/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          nombre_completo: nombreCompleto,
+          email: email,
+          contrasena: password,
+          // correo: email, ← descomenta si tu backend lo acepta también
+        }),
       });
+
       if (res.ok) {
-        localStorage.setItem("user", email);
+        localStorage.setItem("user", nombreCompleto);
         window.location.href = "/";
       } else {
-        alert("No se pudo registrar. Intenta con otro correo.");
+        const errorData = await res.json();
+        console.error("Error del backend:", errorData);
+        alert("No se pudo registrar. Verifica los campos.");
       }
     } catch (err) {
-      alert("Error de conexión");
+      console.error("Error de conexión:", err);
+      alert("Error de conexión con el servidor.");
     }
   };
 
@@ -51,7 +63,7 @@ export default function Register() {
         />
       ))}
 
-      {/* Capa oscura con degradado */}
+      {/* Capa oscura */}
       <div
         className="absolute inset-0 z-10"
         style={{
@@ -60,7 +72,7 @@ export default function Register() {
         }}
       ></div>
 
-      {/* Contenedor formulario */}
+      {/* Formulario */}
       <div className="relative z-20 w-full max-w-md bg-white bg-opacity-90 backdrop-blur-sm rounded-3xl shadow-2xl p-10 border-t-8 border-[#8b1f3b]">
         <h2 className="text-4xl font-extrabold text-center text-[#8b1f3b] mb-10 tracking-wide drop-shadow-md">
           Regístrate
@@ -69,10 +81,28 @@ export default function Register() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
+              htmlFor="nombre"
+              className="block text-sm font-semibold text-gray-800 mb-2"
+            >
+              Nombre completo
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Juan Pérez"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-4 focus:ring-[#8b1f3b] transition"
+              value={nombreCompleto}
+              onChange={(e) => setNombreCompleto(e.target.value)}
+              required
+            />
+          </div>
+
+          <div>
+            <label
               htmlFor="email"
               className="block text-sm font-semibold text-gray-800 mb-2"
             >
-              Correo electrónico
+              Correo electrónico (opcional)
             </label>
             <input
               type="email"
@@ -81,8 +111,6 @@ export default function Register() {
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-4 focus:ring-[#8b1f3b] transition"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="username"
             />
           </div>
 
@@ -101,7 +129,6 @@ export default function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              autoComplete="new-password"
             />
           </div>
 
